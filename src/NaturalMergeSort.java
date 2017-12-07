@@ -8,14 +8,17 @@ public class NaturalMergeSort {
         private static int n;
 
         public static void main(String [] args) {
-            System.out.println("Test1: ");
+
             int[] test1 = {1, 5, 2, 4, 3};
+            System.out.println("Test1: " + Arrays.toString(test1));
             naturalMergeSort(test1);
-            System.out.println("Test2: ");
+
             int[] test2 = {17, 15, 14, 12, 13, 11, 9, 10, 5};
+            System.out.println("Test2: " + Arrays.toString(test2));
             naturalMergeSort(test2);
-            System.out.println("Test3: ");
+
             int[] test3 = {4, 8, 5, 7};
+            System.out.println("Test3: " + Arrays.toString(test3));
             naturalMergeSort(test3);
             //System.out.println(Arrays.toString(test1));
         }
