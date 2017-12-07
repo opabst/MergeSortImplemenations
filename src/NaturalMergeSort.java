@@ -45,9 +45,6 @@ public class NaturalMergeSort {
         n = A.length;
         Queue<Integer> runs = findRuns(A);
 
-        // merge runs
-
-
         // In while-Schleife gefundene Runs abarbeiten
         while(runs.size() > 1) {
             // Nach jeder Iteration erneut bei 0 initialisieren
@@ -89,7 +86,7 @@ public class NaturalMergeSort {
                     }
                 }
                 // B nach A kopieren nach Merge des runs
-                for(int l = start; l < runHigh2; l++) {
+                for(int l = start; l <= runHigh2; l++) {
                     A[l] = B[l];
                 }
             } else {
