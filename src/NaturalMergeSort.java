@@ -1,10 +1,10 @@
-import javafx.scene.layout.Priority;
-
 import java.util.*;
 
+/**
+Eventuell in jeder Iteration runs suchen? Iteration abbrechen wenn nur noch ein run vorhanden ist
+ */
+
 public class NaturalMergeSort {
-
-
         private static int n;
 
         public static void main(String [] args) {
@@ -23,9 +23,8 @@ public class NaturalMergeSort {
             //System.out.println(Arrays.toString(test1));
         }
 
-        private static void naturalMergeSort(int[] A) {
-            n = A.length;
-            Queue<Integer> runs = new ArrayDeque<>(); // speichert Arrays in Form von low/high-Grenzen
+        private static Queue<Integer> findRuns(int[] A) {
+            Queue<Integer> runs = new ArrayDeque<>();
             int low = 0;
             int high = 1;
             while (high <= n) {
@@ -39,9 +38,22 @@ public class NaturalMergeSort {
                 high++;
             }
 
+            return runs;
+        }
+
+        private static void naturalMergeSort(int[] A) {
+            n = A.length;
+            Queue<Integer> runs = findRuns(A);
+
             // merge runs
-            int start = 0;
+            
+
+            // In while-Schleife gefundene Runs abarbeiten
             while(runs.size() > 1) {
+                // Nach jeder Iteration erneut bei 0 initialisieren
+                int start = 0;
+                // Runs paarweise in For-Schleife abarbeiten
+                if(runs.size() > 1) {
                 int runHigh1 = runs.poll();
                 int runHigh2 = runs.poll();
                 int[] B = new int[(runHigh1 - start) + (runHigh2 - runHigh1 + 1)];
@@ -76,8 +88,16 @@ public class NaturalMergeSort {
                         }
                     }
                 }
-                start = runHigh2;
+                } else {
+                    // letzten Run verwerfen
+                    runs.poll();
+                }
                 // B nach A kopieren
+                for(int l = start; l < runHigh2; l++) {
+                    A[l] = B[l];
+                }
+                runs = findRuns(A);
+                
 
 
 
