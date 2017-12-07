@@ -1,9 +1,5 @@
 import java.util.*;
 
-/**
- Eventuell in jeder Iteration runs suchen? Iteration abbrechen wenn nur noch ein run vorhanden ist
- */
-
 public class NaturalMergeSort {
     private static int n;
 
@@ -25,7 +21,6 @@ public class NaturalMergeSort {
 
     private static Queue<Integer> findRuns(int[] A) {
         Queue<Integer> runs = new ArrayDeque<>();
-        int low = 0;
         int high = 1;
         while (high <= n) {
             while(high < n && A[high-1] < A[high]) {
@@ -33,8 +28,6 @@ public class NaturalMergeSort {
             }
             // Run beenden
             runs.add(high-1);
-            // Neuer low-Wert liegt auf dem run-verletzenden Wert
-            low = high;
             high++;
         }
 
@@ -47,9 +40,9 @@ public class NaturalMergeSort {
 
         // In while-Schleife gefundene Runs abarbeiten
         while(runs.size() > 1) {
-            // Nach jeder Iteration erneut bei 0 initialisieren
+            // Nach jeder Iteration Startposition erneut bei 0 initialisieren
             int start = 0;
-            // Runs paarweise in For-Schleife abarbeiten
+            // Runs paarweise abarbeiten
             if(runs.size() > 1) {
                 int runHigh1 = runs.poll();
                 int runHigh2 = runs.poll();
@@ -94,9 +87,6 @@ public class NaturalMergeSort {
                 runs.poll();
             }
             runs = findRuns(A);
-
-
-
 
             // run ist per Definition sortiert, also neue Grenzen erneut einfügen mit
 
